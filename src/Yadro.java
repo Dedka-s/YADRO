@@ -15,27 +15,31 @@ public class Yadro {
             if (str.charAt(i)=='(' || str.charAt(i)=='[' ||  str.charAt(i)=='{'){
                 brackets.add(str.charAt(i));
             }
-
-            if (str.charAt(i)==')'){
-                if (brackets.get(brackets.size()-1)!='(') {
-                    return false;
+            try {
+                if (str.charAt(i)==')'){
+                    if (brackets.get(brackets.size()-1)!='(') {
+                        return false;
+                    }
+                    brackets.remove(brackets.size()-1);
                 }
-                brackets.remove(brackets.size()-1);
+
+                if ( str.charAt(i)==']'){
+                    if (brackets.get(brackets.size()-1)!='[') {
+                        return false;
+                    }
+                    brackets.remove(brackets.size()-1);
+                }
+
+                if (str.charAt(i)=='}'){
+                    if (brackets.get(brackets.size()-1)!='{') {
+                        return false;
+                    }
+                    brackets.remove(brackets.size()-1);
+                }
+            } catch (IndexOutOfBoundsException e) {
+                return false;
             }
 
-            if ( str.charAt(i)==']'){
-                if (brackets.get(brackets.size()-1)!='[') {
-                    return false;
-                }
-                brackets.remove(brackets.size()-1);
-            }
-
-            if (str.charAt(i)=='}'){
-                if (brackets.get(brackets.size()-1)!='{') {
-                    return false;
-                }
-                brackets.remove(brackets.size()-1);
-            }
 
         }
         if (brackets.size() != 0) {
